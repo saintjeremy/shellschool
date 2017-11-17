@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# a note about pseudocoding - write out what you want to achieve
+# then code your way there - 
+
+# here I'm displaying the UID, uname, and a sanity check to 
+# whether the user executing the script is root)
+
+# first the UID
+# UID is identified by a built-in bash shell variable
+# which is a good reminder to call your interpreter
+echo "Your UID is ${UID}"
+
+# second display the uname
+# make it a variable since we are going to
+# store the output of a command in a variable
+# syntax for storing a command to variable is `command +flags`
+# or with modern poarenthetical syntax $(command +flags)
+
+USER_NAME=`id -un`
+
+# or modern syntax USER_NAME=$(id -un)
+# then output
+
+echo "You are currently logged in as ${USER_NAME}"
+
+# third, sanity check. am I root?
+# using an -if- statement you can determine yes/no by
+# naming an expression [[ to execute a conditional command
+
+echo 'Am I Root?'
+sleep 2 #for suspense
+if [[ "${UID}" -eq 0 ]]
+then
+  echo 'Thou art most assuredly the root user'
+else
+  echo 'No, you are not root'
+fi
