@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# demo script containing some basic commands for learning
+
+# display hello - text only single quotes means hard coded text in the script output
+echo 'Hello'
+
+# assign a variable - you can use alphabet and underscores as a first character
+# nomally I use all CAPS to name variables, but demonstrating otherwise here that 
+# lowercase, underscores work in first character - a number will not. so GREETING 
+# can be greeting or in this case _greeting, but never with a number at the front.
+# if you want to number your variables, make sense of it - like greet1 greet2
+_greet='sup d00d'
+
+# display the variable - note use of quotes, double quotes allow variables to expand
+echo "$_greet"
+
+# this is just to demonstrate that single quotes prevent variable expansion 
+echo '$_greet'
+
+# combine variable with hard-coded text
+echo "SO I says to him, $_greet"
+
+# contents of variable using alternate syntax using curly braces
+echo "and he says back, ${_greet}"
+
+# so you can append text to a variable with curly braces like so
+echo "Then someone walked up saying ${_greet}s like they knew us"
+
+# how not to append - this will not work - line will display incorrectly
+echo "$_greeting will not work - see?"
+
+# new variable - uppercase variable convention being used from here out
+ENDING='how goes?'
+
+# tie your variables together with curly braces
+echo ${_greet} ${ENDING}
+
+# reassign variable - make some foolish idiomatic sounding phrase with
+# with proper grammar
+ENDING=", you cool?"
+
+# so, output with the new variable can be like so
+echo ${_greet}${ENDING}
