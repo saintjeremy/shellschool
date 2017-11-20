@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# use this script to demosntrate how to create a user avvoutn on the system
+# read in puts and turn them into variables for operation output
+
+# ask for user's name
+read -p 'What is the username you would like to create' UNAME
+
+# ask for real name
+read -p 'What is the real name of the account user' COMMENT
+
+# ask for password
+read -p 'What is the password to use for this account' PASSWORD
+
+# create user - note use of quotes, a comment will likely have spaces and the username will not
+useradd -c "${COMMENT}" -m ${UNAME}
+
+# set a password
+echo ${PASSWORD} | passwd --stdin "${UNAME}"
+
+# force a password change upon first login
+passwd -e ${UNAME}
