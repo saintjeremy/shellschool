@@ -5,12 +5,10 @@ TIMESTAMP=$(date +%s)
 
 # check for root, exit if not
 echo "am I root"
-if [[ "${UID}" -eq 0 ]]
+if [[ "${UID}" -ne 0 ]]
 then
-  echo 'I see you are root. You may proceed'
-else
-  echo 'you are not a root user, goodbye'
-exit 1
+  echo 'Please run with sudo or as root'
+  exit 1
 fi
 
 # get username make it into a variable
