@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# display the UID of the user excuting the script
+# and display if the user is localuser or not
+
+# display the UID
+echo "your UID is ${UID}"
+
+# only display if the UID does not match 1000.
+TESTUID='1000'
+if [[ "${UID}" -ne "${TESTUID}" ]]
+then
+  echo "Your UID is not ${TESTUID}"
+  exit 1
+fi
+
+# display the username
+UNAME=$(id -un)
+
+# test if the command succeeded
+if [[ "${?}" -ne 0 ]]
+then
+  echo "the id command did not complete successfully"
+  exit 1
+fi
+echo "You are logged in as ${UNAME}"
+
+
+# use a string test conditional - using current logged in user, "localuser"
+TEST='localuser'
+if [[ "${UNAME}" = "${TEST}" ]]
+then
+  echo "Your login matches ${TEST}"
+fi
+
+# test for != for the string
+if [[ "${UNAME}" != "${TEST}" ]]
+then
+  echo "Your user name does not match ${TEST}"
+  exit 1
+fi
+
+exit 0
