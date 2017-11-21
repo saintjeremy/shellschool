@@ -1,0 +1,34 @@
+#!/bin/bash
+# This script demonstrated how to generate random data
+# for demonstration purposes ths will be shown as simple password generators
+#
+
+# RANDOM function - so yo uhave that going for you already
+PASSWORD="${RANDOM}"
+echo "${PASSWORD}"
+
+# Three random numbers
+
+PASSWORD="${RANDOM}${RANDOM}${RANDOM}"
+echo "${PASSWORD}"
+
+# use date / time - unix epoch
+PASSWORD=$(date +%s)
+echo "${PASSWORD}"
+
+# using granularity in nanoseconds
+PASSWORD=$(date +%s%N)
+echo "${PASSWORD}"
+
+# use sha function with date + sha, then use the first seven characters
+PASSWORD=$(date +%s%N | sha256sum | head -c7)
+echo "${PASSWORD}"
+
+# even more random - forty eight characters - go nuts!
+# PASSWORD=$(date +%s%N${RANDOM}${RANDOM} | sha256sum | head -c48)
+# echo "${PASSWORD}"
+
+# We can also get pecial characters in there - with the help of fold, shuf and head
+# a function call provides output that delivers a charachter from an array
+SPECIAL_CHAR=$(echo '!@#$%^&*()_-' | fold -w1 | shuf | head -c1)
+echo "${PASSWORD}${SPECIAL_CHAR}"
