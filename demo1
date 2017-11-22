@@ -5,7 +5,7 @@
 # display hello - text only single quotes means hard coded text in the script output
 echo 'Hello'
 
-# assign a variable - you can use alphabet and underscores as a first character
+# Now assign a variable - you can use alphabet and underscores as a first character
 # nomally I use all CAPS to name variables, but demonstrating otherwise here that 
 # lowercase, underscores work in first character - a number will not. so GREETING 
 # can be greeting or in this case _greeting, but never with a number at the front.
