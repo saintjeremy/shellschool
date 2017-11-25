@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# generate a random password for each user
+
+# display what user typed via positional parameter
+echo "you executed ${0}"
+
+# display file and pathname
+echo "You used $(dirname ${0}) as the path to $(basename ${0})"
+
+# how many arguments are passed into the script. Where inside the script they
+# are parameters, outside the script they are argumnets
+PARAMETERS="${#}"
+echo "You gave ${PARAMETERS} arguments on the command line."
+
+# check to make usre there are arguments given, or exit if none
+if [[ "${PARAMETERS}" -lt 1 ]]
+then
+  echo "Usage: ${0} USER_NAME [USER_NAME]..."
+  exit 1
+fi
+
+# generate a password for each parameter
+for USERNAME in "${@}"
+do
+  PASSWORD=$(date +%s+%N | sha256sum | head -c18)
+  echo "${USERNAME}: ${PASSWORD}"
+done
