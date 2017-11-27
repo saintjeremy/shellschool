@@ -1,7 +1,8 @@
 #!/bin/bash
 # This script demonstrated how to generate random data
 # for demonstration purposes ths will be shown as simple password generators
-#
+# granularity and randomness achieved through some transformations 
+# of date strings and a fun little dive into fold, shuf and head commands
 
 # RANDOM function - so yo uhave that going for you already
 PASSWORD="${RANDOM}"
