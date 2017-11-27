@@ -1,1 +1,28 @@
+#!/bin/bash
 
+# demonstrates while loops, true (do nothing successfully), sleep
+# and the shift function
+
+# display the first three parameters from the command input
+# where where are using ${1}, ${2}, ${3}, and so on for each successive
+# parameter given with the comannd similar to how ${@} or ${*} works
+# numeric operators correlate to the paramters given, as shown here
+# hint, you have to supply three parameters to see how it works
+echo "parameter 1: ${1}"
+echo "parameter 2: ${2}"
+echo "parameter 3: ${3}"
+echo # blank line to keep it tidy
+
+# while loops, adding sleep to see what happens when handling multiple
+# parameters with the output constraints (three parameters to display)
+
+while [[ "${#}" -gt 0 ]]
+do
+  echo "The number of positional parameters: ${#}"
+  echo "parameter 1: ${1}"
+  echo "parameter 2: ${2}"
+  echo "parameter 3: ${3}"
+  echo
+  sleep .5s
+  shift
+done
