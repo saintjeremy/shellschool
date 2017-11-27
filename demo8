@@ -1,0 +1,30 @@
+#!/bin/bash
+#
+# demonstrating i/o redirection
+# use a pipe when you want to take input from a command
+# as input to another command and less than < when you
+# want to redirect the contents of a file to command
+
+
+# redirect STDOUT to a file using >
+FILE="/tmp/data"
+head -n1 /etc/passwd > ${FILE}
+
+# redirect STDIN to the LINE variable using <
+read LINE < ${FILE}
+echo "LINE contains: ${LINE}"
+
+# redirect sdtout to a file with a single >
+head -n3 /etc/passwd > ${FILE}
+echo
+sleep .5s
+echo "Contents of ${FILE}"
+cat ${FILE}
+
+# redirect STDOUT to a file, append with >> to avoid overwriting
+
+echo "${RANDOM} ${RANDOM}" >> ${FILE}
+echo "${RANDOM} ${RANDOM}" >> ${FILE}
+echo
+echo "Contents of ${FILE}:"
+cat ${FILE}
