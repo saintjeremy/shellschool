@@ -64,6 +64,9 @@ echo "This is STDERR" >&2
 # e.g.: `head -n1 /etc/passwd /etc/hosts /not_a_real_file 2>&1 | cat -n`
 # e.g.2: `head -n1 /etc/passwd /etc/hosts /not_a_real_file |& cat -n`
 
+echo "--- discarding things ---"
+
+# discarding output using null device
 # discard STDOUT
 echo
 echo "discarding STDOUT"
