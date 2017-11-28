@@ -21,10 +21,63 @@ sleep .5s
 echo "Contents of ${FILE}"
 cat ${FILE}
 
-# redirect STDOUT to a file, append with >> to avoid overwriting
+# redirect STDOUT to a file, append with >>
 
 echo "${RANDOM} ${RANDOM}" >> ${FILE}
 echo "${RANDOM} ${RANDOM}" >> ${FILE}
 echo
 echo "Contents of ${FILE}:"
 cat ${FILE}
+
+# file descriptors, good times!
+# redirect STDIN to a program using FD 0
+read LINE 0< ${FILE}
+echo
+echo "LINE contains ${LINE}"
+
+# redirect STDOUT to a file using FD 1, overwriting your file
+head -n3 /etc/passwd 1> ${FILE}
+echo
+echo "Contents of ${FILE}:"
+cat ${FILE}
+
+# redirect STDERR to a file using FD 2 trying to head a file that is not there
+ERRORFILE="/tmp/data.err"
+head -n3 /etc/passwd /not_a_file 2> ${ERRORFILE}
+
+# redirect STDOUT and STERR to a file, same example as above
+head -n3 /etc/passwd /really_not_there $> ${FILE}
+echo
+echo "Contents of ${FILE}"
+cat ${FILE}
+
+# redirect STDOUT and STDERR through a pipe
+echo
+head -n3 /etc/passwd /nobody_home |& cat -n
+
+# send output to STDERR
+echo "This is STDERR" >&2
+
+# ** Note for the last example
+# remember: `COMMAND &> FILE` vs `COMMAND |& COMMAND`
+# using 2>&1 we can send output from STDERR to STDOUT or just use |&
+# e.g.: `head -n1 /etc/passwd /etc/hosts /not_a_real_file 2>&1 | cat -n`
+# e.g.2: `head -n1 /etc/passwd /etc/hosts /not_a_real_file |& cat -n`
+
+# discard STDOUT
+echo
+echo "discarding STDOUT"
+head -n3 /etc/passwd /fake_file > /dev/null
+
+# discard STDERR
+echo
+echo "discarding STDERR"
+head -n3 /etc/passwd /not_a_file 2> /dev/null
+
+# discard both STDOUT and STDERR
+echo
+echo "discarding STDOUT and STDERR"
+head -n3 /etc/passwd /truly_fake_file &> /dev/null
+
+# tidy it up
+rm ${FILE} ${ERRORFILE} &> /dev/null
